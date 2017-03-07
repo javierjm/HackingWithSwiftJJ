@@ -183,5 +183,120 @@ dogsSet.popFirst()
 //• A.isStrictSuperset(of: B): returns true if all of set B's items are also in set
 //      A, but A and B are not equal
 
+//********************************************************************** Tuples ************************************************************************************//
 
-// 
+// Important review pattern Matching and destructuring 
+
+var thisIsAllowed = (value: 42)
+var thisIsNot: Int = (23)
+var thisIsNot1: (Int) = 25
+
+var singer = ("Taylor", 14)
+singer = ("Taylor", 23)
+
+// to access the touple you just have to use the name.position of element: 
+print(singer.0)
+
+// You can name elements of touple for easy access
+var singerNamedTouple = (name: "Taylor", age: 14)
+print(singerNamedTouple.name)
+
+// Optional Tuples, tuples can be optional (the whole tuple), or some elements could be optional as well. 
+
+// Comparig Tuples: 2 tuples can be compared if contains up to 6 elements using ==, notice that comparisong will ignore labels, so will focus on types only: 
+
+var cyclist1 = ("Javier", "Jara", "Master A", "Rocos Brujos", "Canondale", "XL")
+var cyclist2 = (fistname: "Javier", lastname:"Jara", category:"Master A", team:"Rocos Brujos", bike:"Canondale", frameSize:"XL")
+var cyclist3 = (fistname: "Laura", lastname:"Vargas", category:"Master Fem", team:"Rocos Brujos", bike:"Giant", frameSize:"XS")
+
+if cyclist3 == cyclist2 {
+    print("same cyclist")
+} else {
+    print("different cyclist")
+}
+
+// Type Alias 
+
+typealias Name = (first: String, last: String)
+
+func marryTaylorsParents(man: Name, woman: Name) -> (husband:Name, wife: Name) {
+        return (man, (woman.first, man.last))
+}
+
+let father = (first: "Scott", last: "Swift")
+let mother = (first: "Andrea", last: "Finlay")
+
+let marry = marryTaylorsParents(man: father, woman: mother)
+
+marry.0.1
+marry.wife.last
+
+print("********************************************************************** Genercis *********************************************************************************")
+
+// Example 
+
+func inspect<T>(_ value: T) {
+    print("Received \(type(of: value)) with the value \(value)")
+}
+
+inspect("Haters gonna hate")
+inspect(56)
+
+// Using a Generic struct 
+
+struct deque<T> {
+    var array = [T]()
+    mutating func pushBack(_ obj: T) {
+        array.append(obj)
+    }
+    mutating func pushFront(_ obj: T) {
+        array.insert(obj, at: 0)
+    }
+    
+    mutating func popBack() -> T? {
+        return array.popLast()
+    }
+    mutating func popFront() -> T? {
+        if array.isEmpty {
+            return nil
+        } else {
+            return array.removeFirst()
+        }
+    }
+}
+
+var testDeque = deque<Int>()
+testDeque.pushBack(5)
+testDeque.pushFront(2)
+testDeque.pushFront(1)
+testDeque.popBack()
+
+
+// Cocoa data Types
+// these data types for example (NSDictionary, NSArray, and in this Case NSCountedSet() does not support generics here an example for adding support through a struct 
+
+
+import Foundation
+
+struct CustomCountedSet<T: Any> {
+
+    let internalSet = NSCountedSet()
+    
+    mutating func add(_ obj: T) {
+        internalSet.add(obj)
+    }
+    mutating func remove(_ obj: T) {
+        internalSet.remove(obj)
+    }
+    func count(for obj: T) -> Int {
+        return internalSet.count(for: obj)
+    }
+}
+
+var countedSet = CustomCountedSet<String>()
+countedSet.add("Hello")
+countedSet.add("Hello")
+countedSet.count(for: "Hello")
+var countedSet2 = CustomCountedSet<Int>()
+countedSet2.add(5)
+countedSet2.count(for: 5)

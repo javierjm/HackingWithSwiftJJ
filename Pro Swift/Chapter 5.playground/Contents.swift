@@ -155,3 +155,61 @@ do {
 }
 
 
+print("************************************ try vs try! vs try ?  ******************************************************")
+
+// try: it tries to excecute some code that might throw  must have a catch block and handle error
+// try: it tries to execeute some code and if fails will crash
+// try? it tries to excecute some code if fails will assign null
+
+
+// Example: 
+func loadText(_ savedText: String) {
+    print("Opening Screen: \(savedText)")
+}
+
+func showFirstRunScreen() {
+    print("Opening first Screen")
+}
+
+// this is how you should use try:
+if let savedText = try? String(contentsOfFile: "saved.txt") {
+    loadText(savedText)
+} else {
+    showFirstRunScreen()
+}
+
+// Also can use the nil coalesce operator for assigning default value: 
+
+let savedText = (try? String(contentsOfFile: "saved.txt")) ?? "Hello, world!"
+loadText(savedText)
+
+// Why 'try?' : if you don't care what the return value is and you just want to make an attempt to do something, try? is for you
+
+
+print("************************************ Assertions  ******************************************************")
+
+// Allow to state that a condition must be true 
+// if false program will halt inmediately, example
+
+//  assert(1 == 2, "Danger, Will Robinson: mathematics failure!")
+
+//  Swift will execute assertions only if it's in debug mode
+
+// If you wish to make assertions in release mode – bearing in mind that a failure causes your app to terminate immediately – you should use precondition() instead.
+
+
+func *(lhs: [Int], rhs: [Int]) -> [Int] {
+    precondition(lhs.count == rhs.count, "Arrays were not the same size")
+    var result = [Int]()
+    for (index, int) in lhs.enumerated() {
+        result.append(int * rhs[index])
+    }
+    return result
+}
+let a = [1, 2, 3]
+let b = [4, 5]
+let c = a * b
+
+
+// Remember, enabling -Ounchecked will effectively disable your preconditions, but it also disables other bounds checking too – that's why it's so fast!
+

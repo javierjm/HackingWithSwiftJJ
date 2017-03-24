@@ -2,7 +2,166 @@
 
 import UIKit
 
-//// ******************************************************************** Nil Coalesce ********************************************************************///
+print("******************************************************************** Pattern Matching ********************************************************************")
+
+// Refers to the ability to match tuples in switch statement 
+
+// Partial Matching: 
+
+// use _ to ignore part of the tuple
+let authentication = (name: "twostraws", password: "fr0st1es", ipAddress: "127.0.0.1")
+switch authentication {
+case ("bilbo", "bagg1n5", _):
+    print("Hello, Bilbo Baggins!")
+    // Use let to request an unknown value from the tuple, and _ to ignore a part
+case ("twostraws", let password, _):
+    print("Hello, Paul Hudson! your password is: \(password)")
+default:
+    print("Who are you?")
+}
+
+print("******************************************************************** Loops ********************************************************************")
+
+
+let twostraws = (name: "twostraws", password: "fr0st1es")
+let bilbo = (name: "bilbo", password: "bagg1n5")
+let taylor = (name: "taylor", password: "fr0st1es")
+let users = [twostraws, bilbo, taylor]
+
+for user in users {
+    print(user.name)
+}
+
+// We can use case statement in Loop for pattern matching: 
+
+for case ("twostraws", "fr0st1es") in users {
+        print("User twostraws has the password fr0st1es")
+}
+
+// or can combine a bind value and match the other in one pair of parenthesis: 
+
+for case let (name, "fr0st1es") in users {
+    print("User \(name) has the password \"fr0st1es\"")
+}
+
+print("******************************************************************** Matching Optionals ********************************************************************")
+
+let name: String? = "twostraws"
+let password: String? = "fr0st1es"
+
+// Option 1 using .some and .none keywords, notice inside parenthesis the vale is unwrapped so is not optional anymore 
+
+switch (name, password) {
+case let (.some(nameUnwrapped), .some(passwordUnwrapped)):
+    print("Hello, \(nameUnwrapped)")
+case let (.some(nameUnwrapped), .none):
+    print("Please enter a password.")
+default:
+    print("Who are you?")
+}
+// Option 2: using optional unwrapping
+
+switch (name, password) {
+case let (nameUnwrapped?, passwordUnwrapped?):
+    print("Hello, \(nameUnwrapped)")
+case let (nameUnwrapped?, nil):
+    print("Please enter a password.")
+default:
+    print("Who are you?")
+}
+
+// Same approach for Loops 
+
+import Foundation
+
+let data: [Any?] = ["Bill", nil, 69, "Ted"]
+for case let .some(datum) in data {
+    print(datum)
+}
+for case let datum? in data {
+    print(datum)
+}
+
+print("******************************************************************** Matching Enums and associated Values ********************************************************************")
+
+
+enum WeatherType {
+    case cloudy(coverage: Int)
+    case sunny
+    case windy
+}
+
+let today = WeatherType.cloudy(coverage: 100)
+
+switch today {
+case .cloudy(let coverage) where coverage == 0:
+    print("You must live in Death Valley")
+case .cloudy(let coverage) where (1...50).contains(coverage):
+    print("It's a bit cloudy, with \(coverage)% coverage")
+case .cloudy(let coverage) where (51...99).contains(coverage):
+    print("It's very cloudy, with \(coverage)% coverage")
+case .cloudy(let coverage) where coverage == 100:
+    print("You must live in the UK")
+case .windy:
+    print("It's windy")
+default:
+    print("It's sunny")
+}
+
+// And for usage in Loop: 
+let forecast: [WeatherType] = [.cloudy(coverage:40), .sunny, .windy, .cloudy(coverage: 100), .sunny]
+for case let .cloudy(coverage) in forecast {
+    print("It's cloudy with \(coverage)% coverage")
+}
+//If you know the associated value and want to use it as a filter, the syntax is almost the same:
+let forecast2: [WeatherType] = [.cloudy(coverage: 40), .sunny, .windy, .cloudy(coverage: 100), .sunny]
+
+for case .cloudy(40) in forecast2 {
+    print("It's cloudy with 40% coverage")
+}
+
+print("******************************************************************** Matching Types ********************************************************************")
+// Keyword is can be used fo matching: 
+    
+let view: AnyObject = UIButton()
+    
+    switch view {
+    case is UIButton:
+        print("Found a button")
+    case is UILabel:
+        print("Found a label")
+    case is UISwitch:
+        print("Found a switch")
+    case is UIView:
+        print("Found a view")
+    default:
+        print("Found something else")
+    }
+
+// Swift will take the first matching case it finds, and is returns true if an object is a specific type or one of its parent classes. So, the above code will print "Found a button", but button is also a View, so it will rely in the order of case senteces 
+
+//a more useful example, you can use this approach to loop over all subviews in an array and filter for labels:
+
+//for label in view.subviews where label is UILabel {
+  //      print("Found a label with frame \(label.frame)")
+//}
+
+print("******************************************************************** Using the where keywords ********************************************************************")
+
+let celebrities: [String?] = ["Michael Jackson", nil, "Michael Caine", nil, "Michael Jordan"]
+
+for name in celebrities where name != nil {
+    print(name)
+}
+
+for case let name? in celebrities {
+    print(name)
+}
+
+
+// it works but prints optionals one approach is to ! unwrap optional or:
+
+print("******************************************************************** Nil Coalesce ********************************************************************")
 
 //let name: String? = nil
 //
@@ -31,8 +190,8 @@ import UIKit
 //print(savedText)
 //
 //
-//let savedText2 = (try? String(contentsOfFile: "saved.txt"))
-//print (savedText2 ?? "Is Fucking nil")
+let savedText2 = (try? String(contentsOfFile: "saved.txt")) ?? "Is nil"
+print (savedText2 )
 
 
 //// ******************************************************************** Guard ********************************************************************/////

@@ -151,7 +151,7 @@ print("******************************************************************** Usin
 let celebrities: [String?] = ["Michael Jackson", nil, "Michael Caine", nil, "Michael Jordan"]
 
 for name in celebrities where name != nil {
-    print(name)
+    print(name!)
 }
 
 for case let name? in celebrities {
@@ -194,131 +194,156 @@ let savedText2 = (try? String(contentsOfFile: "saved.txt")) ?? "Is nil"
 print (savedText2 )
 
 
-//// ******************************************************************** Guard ********************************************************************/////
+print("******************************************************************** Guard ********************************************************************")
 
-//func giveAward(to name: String?) {
-//    guard let winner = name else {
-//        print("No one won the award")
-//        return
-//    }
-//    
-//    guard winner == "Taylor Swift" || winner == "Javier Jara"   else {
-//        print("No way!")
-//        return
-//    }
-//    
-//    print("Congratulations, \(winner)!")
-//}
-//
-//giveAward(to: "Taylor Swift")
-//giveAward(to: "Javier Jara")
-//giveAward(to: nil)
+func giveAward(to name: String?) {
+    guard let winner = name else {
+        print("No one won the award")
+        return
+    }
+    
+    guard winner == "Taylor Swift" || winner == "Javier Jara"   else {
+        print("No way! \(winner) you are not selected for award, thanks")
+        return
+    }
+    
+    guard winner.contains("Taylor") else {
+        print ("You are not Taylor, but you won an award, congrats: \(winner)")
+        return
+    }
+    
+    print("Congratulations, \(winner)!")
+}
+
+giveAward(to: "Taylor Swift")
+giveAward(to: "Javier Jara")
+giveAward(to: nil)
+giveAward(to: "Javier Swift")
 
 
-//// ******************************************************************** Lazy Var ********************************************************************///
+print("******************************************************************** Lazy Var ********************************************************************")
 
-//struct Homer {
-//
-//    lazy var donustPerDay = 15
-//    
-//    lazy var beersPerDay: Int = self.getBeersPerday()
-//
-//    private func getBeersPerday() -> Int {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "EEEE"
-//        let dayOfWeek = dateFormatter.string(from:Date())
-//        
-//        if dayOfWeek == "Thursday" || dayOfWeek == "Sunday" {
-//            return 30
-//        } else {
-//            return 17
-//        }
-//    }
-//}
-//
-//var homer = Homer()
-//
-//homer.beersPerDay
-//homer.donustPerDay
+struct Homer {
 
-//// ******************************************************************** Singletons ********************************************************************///
+    lazy var donustPerDay = 15
+    
+    lazy var beersPerDay: Int = self.getBeersPerday()
 
-//class MusicPlayer {
-//    var musicQuality : Int
-//    
-//    init(quality: Int = 0) {
-//        print("Ready to play songs!")
-//        self.musicQuality = quality
-//    }
-//    
-//}
-//
-//class Singer {
-//    
-//    init() {
-//        print("Creating a new singer")
-//    }
-//    static let musicPlayer = MusicPlayer(quality:10)
-//
-//}
-//
+    private func getBeersPerday() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayOfWeek = dateFormatter.string(from:Date())
+        
+        if dayOfWeek == "Thursday" || dayOfWeek == "Sunday" {
+            return 30
+        } else {
+            return 17
+        }
+    }
+}
 
-//let taylor = Singer()
-//Singer.musicPlayer
-//
-//
+var homer = Homer()
 
-//// ******************************************************************** Sequence Singletons ********************************************************************///
+homer.beersPerDay
+homer.donustPerDay
 
-//func fibonacci(of num: Int) -> Int {
-//    if num < 2 {
-//        return num
-//    } else {
-//        return fibonacci(of: num - 1) + fibonacci(of: num - 2)
-//    }
-//}
-//
-//let fibonacciSequence = Array(0...200).lazy.map(fibonacci)
-//
-//print(fibonacciSequence[19])
-//
-//print(fibonacciSequence[19])
-//
-//print(fibonacciSequence[19])
+print("******************************************************************** Singletons ********************************************************************")
 
-//// ******************************************************************** Destructuring ********************************************************************///
+class MusicPlayer {
+    var musicQuality : Int
+    
+    init(quality: Int = 0) {
+        print("Ready to play songs!")
+        self.musicQuality = quality
+    }
+    
+}
 
-//let data = ("one", "two", "three")
-//
-//let (one, two, three) = data
-//
+class Singer {
+    
+    init() {
+        print("Creating a new singer")
+    }
+    static let musicPlayer = MusicPlayer(quality:10)
+    
+    //  The static part means this property is shared by the class rather than instances of the class, meaning that you use Singer.musicPlayer rather than taylor.musicPlayer. The let part of course means that it's a constant.
+
+}
+
+
+let taylorSingleton = Singer()
+// When it runs, the output is "Creating a new singer" – the "Ready to play songs!" message won't appear. If you add one more line to the end of your playground, only then will the message appear:
+Singer.musicPlayer
+
+// Yes: all Swift static let singletons are automatically lazy – they only get created when they are needed. It's so easy to do, and yet perfectly efficient too. Thanks, Swift team!
+
+let javiSingleton = Singer()
+
+Singer.musicPlayer.musicQuality
+
+
+print("******************************************************************** Sequence Singleton ********************************************************************")
+
+func fibonacci(of num: Int) -> Int {
+    if num < 2 {
+        return num
+    } else {
+        return fibonacci(of: num - 1) + fibonacci(of: num - 2)
+    }
+}
+
+let fibonacciSequence = Array(0...200).lazy.map(fibonacci)
+
+print(fibonacciSequence[19])
+
+print(fibonacciSequence[1])
+
+print(fibonacciSequence[19])
+
+print("******************************************************************** Destructuring ********************************************************************")
+
+let dataTuple = ("one", "two", "three")
+let (one, two, three) = dataTuple
+
 //// here you ignore the third value
 //let (one1, two2, _) = data
 //
 //
 //// For swapping two variables, without using a third one:
-//var A = 8
-//var B = 9
-//
-//print("A is: \(A), and B is: \(B)")
-//(A, B) = (B, A)
-//
-//print("A is now: \(A), and B is now: \(B)")
+var A = 8
+var B = 9
 
-//// ******************************************************************** Labeled Statements ********************************************************************///
+print("A is: \(A), and B is: \(B)")
+(A, B) = (B, A)
+
+print("A is now: \(A), and B is now: \(B)")
+
+print("******************************************************************** Labeled Statements ********************************************************************")
 
 // one can label any statement (ie if, while, for)
 
-//var board = [[String]](repeating: [String](repeating: "",count: 10), count: 5)
-//board[3][5] = "x"
-//rowLoop: for (rowIndex, cols) in board.enumerated() {
-//    colLoop: for (colIndex, col) in cols.enumerated() {
-//        if col == "x" {
-//            print("Found the treasure at row \(rowIndex) col \(colIndex)!")
-//            break rowLoop
-//        }
-//    }
-//}
+// it is label:statement 
+
+// this is how a matrix is build:
+var board = [[String]](repeating: [String](repeating: "",count: 10), count: 5)
+
+board[3][5] = "x"
+
+rowLoop: for (rowIndex, cols) in board.enumerated() {
+    colLoop: for (colIndex, col) in cols.enumerated() {
+        if col == "x" {
+            print("Found the treasure at row \(rowIndex) col \(colIndex)!")
+            break rowLoop
+        }
+    }
+}
+
+anyLoop: for i in 1...10 {
+    print("No looping at: \(i)")
+    if(i == 5) {
+        break anyLoop
+    }
+}
 
 
 //// ******************************************************************** Nested Functions ********************************************************************///

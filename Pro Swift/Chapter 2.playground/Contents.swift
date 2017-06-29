@@ -1,8 +1,8 @@
-// Chapter 3 
+// Chapter 2
 
 import UIKit
 
-//********************************************************************** Usefull initializers ************************************************************************************//
+print("********************************************************************* Usefull initializers ***********************************************************************************")
 
 let heading = "This is a heading"
 
@@ -15,26 +15,29 @@ var board = [[String]](repeating: [String](repeating: "",count: 12), count: 11)
 
 print("Boar count is: \(board[0].count)")
 
-//********************************************************************** Converting to and form numbers ************************************************************************************//
+print("********************************************************************* Converting to and form numbers ***********************************************************************************")
 
 // Instead using this: 
-// let str1 = "\(someInteger)"
+let str1 = "\(666)"
 // use this:
-// let str2 = String(someInteger)
+let str2 = String(666)
 
 let int1 = Int("elephant") ?? 0
 let int4 = Int("1C", radix: 16)
 
 print("\(int4)")
-//********************************************************************** Unique arrays ************************************************************************************//
+
+
+print("********************************************************************* Unique arrays ***********************************************************************************")
+
 
 // How to remove duplicates from arrays ?
 
 let scores = [5, 3, 6, 1, 3, 5, 3, 9]
 let scoresSet = Set(scores)
-let uniqueScores = Array(scoresSet)
+let uniqueScores = Array(scoresSet).sorted()
 
-//********************************************************************** Enums ************************************************************************************//
+print("********************************************************************* Enums ***********************************************************************************")
 enum Planet: Int {
     case mercury = 1
     case venus
@@ -79,6 +82,9 @@ struct Toy {
     let color: Color
 }
 
+
+// just specifying String as the raw data type for your enum is enough to give them meaningful names – Swift automatically maps your enum name to a string. For example, this will print "Pink":
+
 let pink = Color.pink.rawValue
 print(pink)
 
@@ -90,7 +96,7 @@ print("The \(barbie.name) toy is color: \(barbie.color.capitalized()), \(barbie.
 // get the string form of the Color then call a method on it
 print("The \(barbie.name) toy is \(barbie.color.rawValue.uppercased())")
 
-//********************************************************************** Arrays ************************************************************************************//
+print("********************************************************************* Arrays ***********************************************************************************")
 
 
 // Protocol Comparable is required if you want to use sort, min, max functions in array, elements inside array must adopt the protocol 
@@ -150,10 +156,19 @@ if dogs.isEmpty {
 
 // Look for reserveCapacity() this will reserve contiguos spaces for an array 
 
-//********************************************************************** Sets ************************************************************************************//
+print("********************************************************************* Sets ***********************************************************************************")
 
 var set1 = Set<Int>([1, 2, 3, 4, 5])
 var dogsSet = Set<Dog>([poppy, rusty, rover, beethoven])
+// That creates a new set from an array, but you can create them from ranges too, just like arrays:
+var set2 = Set(1...100)
+
+// You can also add items to them individually, although the method is named insert() rather than append() to reflect its unordered nature:
+set1.insert(6)
+set1.insert(7)
+
+
+// To check whether an item exists in your set, use the lightning fast contains() method:
 
 if dogsSet.contains(poppy) {
     print("found \(poppy.breed)")
@@ -183,7 +198,7 @@ dogsSet.popFirst()
 //• A.isStrictSuperset(of: B): returns true if all of set B's items are also in set
 //      A, but A and B are not equal
 
-//********************************************************************** Tuples ************************************************************************************//
+print("********************************************************************* Tuples ***********************************************************************************")
 
 // Important review pattern Matching and destructuring 
 
@@ -278,7 +293,7 @@ testDeque.popBack()
 
 import Foundation
 
-struct CustomCountedSet<T: Any> {
+struct CustomCountedSet<T> {
 
     let internalSet = NSCountedSet()
     

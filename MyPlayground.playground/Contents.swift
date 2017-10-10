@@ -114,3 +114,14 @@ for album in allAlbums {
 }
 
 
+var test: String?
+
+var test2: String? = test!
+
+if let test3 = test2 {
+    print("\(test3) not null")
+} else {
+    print("null bitch")
+}
+
+

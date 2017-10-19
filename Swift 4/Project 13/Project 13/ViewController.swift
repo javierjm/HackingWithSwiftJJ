@@ -95,7 +95,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         if let cgimg = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
             let processedImage = UIImage(cgImage: cgimg)
-            imageView.image = processedImage
+            self.imageView.image = processedImage
         }
         
     }

@@ -1,24 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FizzBuzz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehv-dr-DCD">
+                                <rect key="frame" x="215" y="515" width="89" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <state key="normal" title="Play Again">
+                                    <color key="titleColor" red="0.97254901960784312" green="0.95294117647058818" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 / 5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWE-Nt-4Ct">
+                                <rect key="frame" x="260" y="20" width="44" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <color key="textColor" red="0.97254901960784312" green="0.95294117647058818" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJZ-UG-t0m" userLabel="Game View">
+                                <rect key="frame" x="40" y="174" width="240" height="240"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUp-ml-GNo">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="70"/>
+                                        <state key="normal" title="0" backgroundImage="button_border">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJ4-Gd-kfd">
+                                        <rect key="frame" x="125" y="0.0" width="115" height="115"/>
+                                        <state key="normal" image="champagne100" backgroundImage="button_border">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuT-5b-mf3">
+                                        <rect key="frame" x="0.0" y="125" width="115" height="115"/>
+                                        <state key="normal" image="lightning100" backgroundImage="button_border">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6a-Tz-B2N">
+                                        <rect key="frame" x="125" y="125" width="115" height="115"/>
+                                        <state key="normal" image="space100" backgroundImage="button_border">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="HuT-5b-mf3" firstAttribute="leading" secondItem="HJZ-UG-t0m" secondAttribute="leading" id="7a0-hj-dxU"/>
+                                    <constraint firstItem="ZUp-ml-GNo" firstAttribute="height" secondItem="HJZ-UG-t0m" secondAttribute="height" multiplier="0.48" id="8Kj-2G-T61"/>
+                                    <constraint firstItem="e6a-Tz-B2N" firstAttribute="height" secondItem="ZUp-ml-GNo" secondAttribute="height" id="Aot-AM-raA"/>
+                                    <constraint firstItem="aJ4-Gd-kfd" firstAttribute="height" secondItem="ZUp-ml-GNo" secondAttribute="height" id="JlT-bd-0Ev"/>
+                                    <constraint firstAttribute="width" secondItem="HJZ-UG-t0m" secondAttribute="height" multiplier="1:1" id="K4W-gQ-qax"/>
+                                    <constraint firstAttribute="trailing" secondItem="e6a-Tz-B2N" secondAttribute="trailing" id="KdV-Ur-VOB"/>
+                                    <constraint firstAttribute="bottom" secondItem="HuT-5b-mf3" secondAttribute="bottom" id="RSI-RF-W7l"/>
+                                    <constraint firstAttribute="bottom" secondItem="e6a-Tz-B2N" secondAttribute="bottom" id="SlI-KN-qmJ"/>
+                                    <constraint firstItem="ZUp-ml-GNo" firstAttribute="top" secondItem="HJZ-UG-t0m" secondAttribute="top" id="TiC-kK-hmv"/>
+                                    <constraint firstItem="ZUp-ml-GNo" firstAttribute="width" secondItem="HJZ-UG-t0m" secondAttribute="width" multiplier="0.48" id="azO-xo-hX5"/>
+                                    <constraint firstAttribute="trailing" secondItem="aJ4-Gd-kfd" secondAttribute="trailing" id="bIl-O0-nRV"/>
+                                    <constraint firstItem="aJ4-Gd-kfd" firstAttribute="width" secondItem="ZUp-ml-GNo" secondAttribute="width" id="bk2-3J-bd4"/>
+                                    <constraint firstItem="HuT-5b-mf3" firstAttribute="width" secondItem="ZUp-ml-GNo" secondAttribute="width" id="eHW-4Z-hDu"/>
+                                    <constraint firstItem="ZUp-ml-GNo" firstAttribute="leading" secondItem="HJZ-UG-t0m" secondAttribute="leading" id="fKD-SG-oV7"/>
+                                    <constraint firstItem="e6a-Tz-B2N" firstAttribute="width" secondItem="ZUp-ml-GNo" secondAttribute="width" id="iLQ-Rm-wtm"/>
+                                    <constraint firstItem="aJ4-Gd-kfd" firstAttribute="top" secondItem="HJZ-UG-t0m" secondAttribute="top" id="nYe-IO-XKu"/>
+                                    <constraint firstItem="HuT-5b-mf3" firstAttribute="height" secondItem="ZUp-ml-GNo" secondAttribute="height" id="usy-Wl-JGL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.72156862745098038" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="HJZ-UG-t0m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Hle-uN-gEJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ehv-dr-DCD" secondAttribute="trailing" constant="16" id="JUV-rs-dT4"/>
+                            <constraint firstItem="HJZ-UG-t0m" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="YSq-6E-YAh"/>
+                            <constraint firstItem="HJZ-UG-t0m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="fVC-YH-rhl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pWE-Nt-4Ct" secondAttribute="trailing" constant="16" id="gQu-aW-EOc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ehv-dr-DCD" secondAttribute="bottom" constant="20" id="j6L-0o-Pwb"/>
+                            <constraint firstItem="pWE-Nt-4Ct" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lhP-qw-kwS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.875" y="133.09859154929578"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="button_border" width="400" height="400"/>
+        <image name="champagne100" width="98" height="100"/>
+        <image name="lightning100" width="58" height="100"/>
+        <image name="space100" width="94" height="100"/>
+    </resources>
 </document>

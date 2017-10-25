@@ -8,6 +8,6 @@
 
 import UIKit
 
-class Constants: NSObject {
-
+enum CellIdentifier{
+    static let PersonCell = "Person"
 }
